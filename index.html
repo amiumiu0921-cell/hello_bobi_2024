@@ -1,0 +1,258 @@
+
+<style>
+  @keyframes shake { 0%,100%{transform:rotate(0)} 20%{transform:rotate(-8deg)} 40%{transform:rotate(8deg)} 60%{transform:rotate(-5deg)} 80%{transform:rotate(5deg)} }
+  @keyframes fadeIn { from{opacity:0;transform:translateY(12px)} to{opacity:1;transform:translateY(0)} }
+  @keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-6px)} }
+  .shake { animation: shake 0.6s ease; }
+  .fade-in { animation: fadeIn 0.5s ease forwards; }
+  .float { animation: float 3s ease-in-out infinite; }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  .wrap { font-family: var(--font-sans); padding: 1.5rem 1rem; max-width: 640px; margin: 0 auto; }
+
+  .header { text-align: center; margin-bottom: 1.5rem; }
+  .logo { font-size: 13px; font-weight: 500; letter-spacing: 0.08em; color: var(--color-text-secondary); margin-bottom: 4px; }
+  .brand { font-size: 22px; font-weight: 500; color: var(--color-text-primary); }
+  .tagline { font-size: 13px; color: var(--color-text-secondary); margin-top: 6px; line-height: 1.6; }
+
+  .fortune-jar { 
+    width: 96px; height: 96px; margin: 0 auto 1.25rem;
+    background: var(--color-background-secondary);
+    border: 0.5px solid var(--color-border-secondary);
+    border-radius: 50%; display: flex; align-items: center; justify-content: center;
+    font-size: 44px; cursor: pointer; transition: transform 0.2s;
+  }
+  .fortune-jar:hover { transform: scale(1.05); }
+  .fortune-jar:active { transform: scale(0.97); }
+
+  .draw-btn {
+    display: block; width: 100%; max-width: 280px; margin: 0 auto 1.5rem;
+    padding: 12px 0; font-size: 15px; font-weight: 500;
+    color: var(--color-text-primary); background: transparent;
+    border: 0.5px solid var(--color-border-secondary);
+    border-radius: var(--border-radius-lg); cursor: pointer;
+    transition: background 0.15s, transform 0.1s;
+    letter-spacing: 0.04em;
+  }
+  .draw-btn:hover { background: var(--color-background-secondary); }
+  .draw-btn:active { transform: scale(0.98); }
+
+  .card {
+    background: var(--color-background-primary);
+    border: 0.5px solid var(--color-border-tertiary);
+    border-radius: var(--border-radius-lg);
+    padding: 1.5rem 1.25rem;
+    margin-bottom: 1rem;
+  }
+
+  .fortune-header { display: flex; align-items: center; gap: 12px; margin-bottom: 1rem; }
+  .fortune-badge {
+    font-size: 13px; font-weight: 500; padding: 4px 12px;
+    border-radius: var(--border-radius-md);
+  }
+  .badge-great { background: var(--color-background-warning); color: var(--color-text-warning); }
+  .badge-good  { background: var(--color-background-success); color: var(--color-text-success); }
+  .badge-mid   { background: var(--color-background-info);    color: var(--color-text-info); }
+  .badge-low   { background: var(--color-background-secondary); color: var(--color-text-secondary); }
+
+  .fortune-number { font-size: 13px; color: var(--color-text-secondary); margin-left: auto; }
+
+  .fortune-title { font-size: 18px; font-weight: 500; color: var(--color-text-primary); margin-bottom: 4px; }
+  .fortune-subtitle { font-size: 13px; color: var(--color-text-secondary); margin-bottom: 1rem; }
+
+  .poem-block {
+    border-left: 2px solid var(--color-border-secondary);
+    padding: 0.75rem 1rem;
+    margin-bottom: 1rem;
+    font-size: 14px; line-height: 2; color: var(--color-text-secondary);
+    font-style: italic;
+  }
+
+  .section-label { font-size: 12px; font-weight: 500; color: var(--color-text-tertiary); letter-spacing: 0.06em; margin-bottom: 6px; text-transform: uppercase; }
+
+  .fortune-text { font-size: 14px; line-height: 1.8; color: var(--color-text-primary); margin-bottom: 1rem; }
+
+  .tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 1rem; }
+  .tag {
+    font-size: 12px; padding: 3px 10px;
+    border: 0.5px solid var(--color-border-secondary);
+    border-radius: 999px; color: var(--color-text-secondary);
+  }
+
+  .companion { display: flex; align-items: flex-start; gap: 10px; margin-top: 1rem; padding-top: 1rem; border-top: 0.5px solid var(--color-border-tertiary); }
+  .companion-icon { font-size: 20px; flex-shrink: 0; margin-top: 2px; }
+  .companion-text { font-size: 13px; color: var(--color-text-secondary); line-height: 1.7; }
+  .companion-title { font-weight: 500; color: var(--color-text-primary); font-size: 13px; margin-bottom: 2px; }
+
+  .ritual-card {
+    background: var(--color-background-secondary);
+    border-radius: var(--border-radius-md);
+    padding: 1rem;
+    font-size: 13px; color: var(--color-text-secondary); line-height: 1.8;
+  }
+  .ritual-title { font-weight: 500; color: var(--color-text-primary); margin-bottom: 6px; font-size: 14px; }
+
+  .divider { height: 0.5px; background: var(--color-border-tertiary); margin: 1.25rem 0; }
+
+  .cta-row { display: flex; gap: 8px; margin-top: 1rem; }
+  .cta-btn {
+    flex: 1; padding: 10px 0; font-size: 13px;
+    border: 0.5px solid var(--color-border-secondary); border-radius: var(--border-radius-md);
+    background: transparent; color: var(--color-text-secondary); cursor: pointer;
+    transition: background 0.15s;
+  }
+  .cta-btn:hover { background: var(--color-background-secondary); }
+
+  .hidden { display: none; }
+  .animal-select { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 1rem; }
+  .animal-btn {
+    padding: 6px 14px; font-size: 13px;
+    border: 0.5px solid var(--color-border-secondary); border-radius: 999px;
+    background: transparent; color: var(--color-text-secondary); cursor: pointer;
+    transition: all 0.15s;
+  }
+  .animal-btn.selected { border-color: var(--color-border-primary); color: var(--color-text-primary); background: var(--color-background-secondary); }
+</style>
+
+<div class="wrap">
+  <div class="header">
+    <div class="logo">🐾 BOBI 波比</div>
+    <div class="brand">波比保佑籤</div>
+    <div class="tagline">毛孩每月小運勢 × 飼主陪伴提醒 × 可愛儀式感</div>
+  </div>
+
+  <div id="pre-draw">
+    <div style="text-align:center;margin-bottom:0.75rem;font-size:13px;color:var(--color-text-secondary)">你家毛孩是？</div>
+    <div class="animal-select" style="justify-content:center" id="animal-btns">
+      <button class="animal-btn selected" onclick="selectAnimal(this,'🐶','狗主子')">🐶 狗狗</button>
+      <button class="animal-btn" onclick="selectAnimal(this,'🐱','貓主子')">🐱 貓貓</button>
+      <button class="animal-btn" onclick="selectAnimal(this,'🐰','兔兔')">🐰 兔兔</button>
+      <button class="animal-btn" onclick="selectAnimal(this,'🐹','鼠鼠')">🐹 鼠鼠</button>
+    </div>
+
+    <div class="fortune-jar float" id="jar" onclick="shakeDraw()">🏮</div>
+
+    <button class="draw-btn" onclick="shakeDraw()">搖一搖，求本月籤</button>
+  </div>
+
+  <div id="result-area" class="hidden"></div>
+</div>
+
+<script>
+const FORTUNES = [
+  {
+    level: "大吉", badge: "badge-great", emoji: "🌟",
+    no: "第一籤", title: "春風得意籤", subtitle: "萬事皆宜，毛孩心花開",
+    poem: ["春風輕拂暖融融，", "毛孩今月運勢濃，", "出行玩耍皆順意，", "主人陪伴笑聲中。"],
+    fortune: "本月毛孩狀態滿點！活力充沛，正是嘗試新事物的好時機。無論是換新玩具、調整飲食，還是報名訓練課程，這個月都特別適合。",
+    tags: ["外出", "新玩具", "訓練", "健檢"],
+    ritual: { title: "本月儀式感任務", text: "帶毛孩去一個新公園，拍一張它探索新領域的照片。存起來，這張照片未來會讓你很感動。" },
+    companion: { title: "飼主陪伴提醒", text: "你的毛孩最近很想跟你說話。今天試著坐在牠旁邊，什麼都不做，就靜靜陪著牠五分鐘。" },
+    items: ["牽繩", "胸背帶"]
+  },
+  {
+    level: "中吉", badge: "badge-good", emoji: "🌿",
+    no: "第八籤", title: "靜好平安籤", subtitle: "平穩踏實，細水長流",
+    poem: ["綠葉輕搖映日光，", "平靜之中有吉祥，", "毛孩乖巧待主旁，", "居家安樂好時光。"],
+    fortune: "這個月是沉澱的好時機。毛孩狀態平穩，適合建立新的日常習慣。居家環境的小升級，會讓牠格外有安全感。",
+    tags: ["居家", "習慣養成", "環境升級"],
+    ritual: { title: "本月儀式感任務", text: "為毛孩的休息角落換一個新的舒適墊或玩具，讓牠知道家永遠是最棒的地方。" },
+    companion: { title: "飼主陪伴提醒", text: "最近你可能有點忙，毛孩在默默等你。今晚早點回家，陪牠玩十分鐘，這比任何禮物都重要。" },
+    items: ["尿布墊", "居家用品"]
+  },
+  {
+    level: "小吉", badge: "badge-mid", emoji: "🌸",
+    no: "第十五籤", title: "溫柔守護籤", subtitle: "需要多一點關愛",
+    poem: ["花開半朵最溫柔，", "慢慢來才是節奏，", "毛孩需要你的手，", "輕聲細語解憂愁。"],
+    fortune: "本月毛孩情緒較為敏感，可能比平時更黏人，或有些不尋常的行為。不用擔心，多一點耐心就好。",
+    tags: ["情緒照護", "健康觀察", "老年護理"],
+    ritual: { title: "本月儀式感任務", text: "今天多摸摸牠，用你的聲音安慰牠。如果牠年紀大了，考慮給牠一件舒適的護具，讓行動更輕鬆。" },
+    companion: { title: "飼主陪伴提醒", text: "毛孩年紀漸長，每一天都是禮物。今天多花一點時間好好觀察牠，記錄下牠可愛的模樣。" },
+    items: ["老年護具", "頭套"]
+  },
+  {
+    level: "末吉", badge: "badge-low", emoji: "🌙",
+    no: "第二十三籤", title: "靜待花開籤", subtitle: "轉機就在下個轉角",
+    poem: ["月圓之前有黑暗，", "靜心等待自然安，", "毛孩身旁你不離，", "好運不遠在眼前。"],
+    fortune: "這個月可能有點小波折，但都是暫時的。注意毛孩的飲食和作息，有任何異狀不要拖，及早確認才安心。",
+    tags: ["健康注意", "飲食調整", "定期健檢"],
+    ritual: { title: "本月儀式感任務", text: "帶毛孩去做一次健康檢查，或者更新牠的玩具，給牠一點新鮮感和活力。" },
+    companion: { title: "飼主陪伴提醒", text: "你也辛苦了。陪伴毛孩的同時，也別忘了照顧自己。你狀態好，牠才安心。" },
+    items: ["玩具", "居家用品"]
+  }
+];
+
+let currentAnimal = { emoji: "🐶", label: "狗主子" };
+
+function selectAnimal(btn, emoji, label) {
+  document.querySelectorAll('.animal-btn').forEach(b => b.classList.remove('selected'));
+  btn.classList.add('selected');
+  currentAnimal = { emoji, label };
+}
+
+function shakeDraw() {
+  const jar = document.getElementById('jar');
+  jar.classList.remove('shake');
+  void jar.offsetWidth;
+  jar.classList.add('shake');
+  setTimeout(() => {
+    const f = FORTUNES[Math.floor(Math.random() * FORTUNES.length)];
+    showFortune(f);
+  }, 700);
+}
+
+function showFortune(f) {
+  document.getElementById('pre-draw').classList.add('hidden');
+  const area = document.getElementById('result-area');
+  area.classList.remove('hidden');
+
+  area.innerHTML = `
+    <div class="card fade-in">
+      <div class="fortune-header">
+        <span class="fortune-badge ${f.badge}">${f.emoji} ${f.level}</span>
+        <span class="fortune-number">${f.no}</span>
+      </div>
+      <div class="fortune-title">${f.title}</div>
+      <div class="fortune-subtitle">${currentAnimal.emoji} ${currentAnimal.label} · ${f.subtitle}</div>
+
+      <div class="poem-block">
+        ${f.poem.map(l => `<div>${l}</div>`).join('')}
+      </div>
+
+      <div class="section-label">本月運勢</div>
+      <div class="fortune-text">${f.fortune}</div>
+
+      <div class="section-label">適合關注</div>
+      <div class="tags">${f.tags.map(t => `<span class="tag">${t}</span>`).join('')}</div>
+
+      <div class="divider"></div>
+
+      <div class="ritual-card">
+        <div class="ritual-title">🕯 ${f.ritual.title}</div>
+        ${f.ritual.text}
+      </div>
+
+      <div class="companion">
+        <div class="companion-icon">💌</div>
+        <div>
+          <div class="companion-title">${f.companion.title}</div>
+          <div class="companion-text">${f.companion.text}</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card fade-in" style="animation-delay:0.15s">
+      <div class="section-label">波比推薦本月好物</div>
+      <div class="fortune-text" style="margin-bottom:0.5rem">根據這個月的籤，特別適合留意：</div>
+      <div class="tags">${f.items.map(t => `<span class="tag">🛍 ${t}</span>`).join('')}</div>
+      <div style="font-size:12px;color:var(--color-text-tertiary);margin-top:8px">蝦皮搜尋「波比寵物」即可找到</div>
+    </div>
+
+    <div class="cta-row">
+      <button class="cta-btn" onclick="location.reload()">↺ 再求一籤</button>
+      <button class="cta-btn" onclick="sendPrompt('幫我根據「${f.title}」設計一則IG貼文，融入波比保佑籤的概念')">✦ 幫我寫行銷文案 ↗</button>
+    </div>
+  `;
+}
+</script>
